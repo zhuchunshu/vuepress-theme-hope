@@ -39,6 +39,15 @@ export interface MarkdownEnhanceOptions {
   gfm?: boolean;
 
   /**
+   * Whether to enable obsidian favored markdown support
+   *
+   * 是否启用 Obsidian 风格的 Markdown 语法支持
+   *
+   * @default false
+   */
+  obsidian?: boolean;
+
+  /**
    * Whether to enable custom container including
    *
    * - info
@@ -171,7 +180,16 @@ export interface MarkdownEnhanceOptions {
    *
    * @default false
    */
-  imageSize?: ImageMarkOptions | boolean;
+  imageSize?: boolean;
+
+  /**
+   * Whether to enable obsidian favored image size mark support
+   *
+   * 是否启用 Obsidian 风格的图片大小标记支持。
+   *
+   * @default false
+   */
+  obsidianImageSize?: boolean;
 
   /**
    * Whether to enable mark format support

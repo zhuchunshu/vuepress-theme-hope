@@ -36,6 +36,7 @@ import {
   imageLazyload,
   imageMark,
   imageSize,
+  obsidianImageSize,
   include,
   katex,
   mathjax,
@@ -85,11 +86,11 @@ export const mdEnhancePlugin =
 
     const getStatus = (
       key: keyof MarkdownEnhanceOptions,
-      gfm = false
+      preset?: "gfm" | "obsidian"
     ): boolean =>
       key in options
         ? Boolean(options[key])
-        : (gfm && "gfm" in options && options.gfm) || false;
+        : (preset && preset in options && options[preset]) || false;
 
     const locales = getLocales({
       app,
@@ -101,9 +102,9 @@ export const mdEnhancePlugin =
     const chartEnable = getStatus("chart");
     const echartsEnable = getStatus("echarts");
     const flowchartEnable = getStatus("flowchart");
-    const footnoteEnable = getStatus("footnote", true);
-    const imageMarkEnable = getStatus("imageMark", true);
-    const tasklistEnable = getStatus("tasklist", true);
+    const footnoteEnable = getStatus("footnote", "gfm");
+    const imageMarkEnable = getStatus("imageMark", "gfm");
+    const tasklistEnable = getStatus("tasklist", "gfm");
     const mermaidEnable = getStatus("mermaid");
     const presentationEnable = getStatus("presentation");
     const katexEnable = getStatus("katex");
@@ -251,14 +252,16 @@ export const mdEnhancePlugin =
           md.use(attrs, typeof options.attrs === "object" ? options.attrs : {});
         if (getStatus("align")) md.use(align);
         if (getStatus("container")) md.use(hint, locales);
-        if (getStatus("imageLazyload")) md.use(imageLazyload);
         if (getStatus("figure")) md.use(figure);
+        if (getStatus("imageLazyload")) md.use(imageLazyload);
         if (imageMarkEnable)
           md.use(
             imageMark,
             typeof options.imageMark === "object" ? options.imageMark : {}
           );
         if (getStatus("imageSize")) md.use(imageSize);
+        if (getStatus("obsidianImageSize", "obsidian"))
+          md.use(obsidianImageSize);
         if (getStatus("sup")) md.use(sup);
         if (getStatus("sub")) md.use(sub);
         if (footnoteEnable) md.use(footnote);
