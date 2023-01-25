@@ -82,7 +82,7 @@ export const injectDarkMode = (app: App): void => {
   });
 };
 
-export const setupDarkMode = (): void => {
+export const setupDarkmode = (): void => {
   const { isDarkmode } = useDarkmode();
 
   const updateDOM = (isDark = isDarkmode.value): void => {
