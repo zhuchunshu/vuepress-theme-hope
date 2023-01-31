@@ -16,9 +16,10 @@ import { getRedirectHTML } from "../node/typings/index.js";
 
 const require = createRequire(import.meta.url);
 
-const cli = cac("vp-redirect");
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const version = <string>require("../../package.json").version;
+
+const cli = cac("vp-redirect");
 
 cli
   .command(
